@@ -1,0 +1,12 @@
+{
+  "name": "AppTaller",
+  "displayName": "AppTaller",
+  "expo": {
+    "name": "AppTaller",
+    "slug": "AppTaller",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
