@@ -120,6 +120,7 @@ const CardSimpleUsageShowcase = () => {
             size="large"
             placeholder="Contraseña"
             textContentType="password"
+            secureTextEntry={true}
             value={pasword}
             style={styles.input}
             onChangeText={(nextValue) => setPasword(nextValue)}
