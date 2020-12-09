@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BackHandler, Alert } from "react-native";
+
 import * as eva from "@eva-design/eva";
 import {
   ApplicationProvider,
@@ -13,44 +15,53 @@ import Coche from "./components/coche2.svg";
 import { StyleSheet, View } from "react-native";
 import { default as theme } from "./theme.json"; // <-- Import app theme
 import { default as mapping } from "./mapping.json"; // <-- Import app mapping
+import { Keyboard } from "react-native";
 
 const styles = StyleSheet.create({
   input: {
+    zIndex: 4,
     marginBottom: 5,
     borderRadius: 70,
     borderColor: theme["primary"],
   },
   button: {
+    zIndex: 4,
     borderRadius: 70,
     backgroundColor: theme["secondary"],
     borderColor: theme["secondary"],
     marginBottom: 5,
   },
   textButton: {
+    zIndex: 4,
     borderColor: theme["primary"],
     backgroundColor: theme["primary"],
   },
   layoutFormulary: {
-    marginTop: "55%",
     borderColor: "#53BEB4",
     backgroundColor: "#53BEB4",
   },
   layoutCoche: {
-    marginTop: -400,
-    width: "90%",
+    width: "92%",
+    height: 300,
     zIndex: 2,
-    top: 40,
+    marginTop: 40,
+    backgroundColor: "rgba(76, 175, 80, 0)",
+  },
+  layoutCoche2: {
+    height: 300,
+    zIndex: -2,
+
     backgroundColor: "rgba(76, 175, 80, 0)",
   },
   card: {
-    position: "absolute",
-    margin: 40,
+    marginTop: "-45%",
     width: "96%",
-    height: "70%",
-    bottom: -20,
+    height: "72%",
+    bottom: 0,
     borderRadius: 70,
     borderColor: "#53BEB4",
     backgroundColor: "#53BEB4",
+    justifyContent: "flex-end",
   },
   view: {
     width: "100%",
@@ -67,14 +78,24 @@ const styles = StyleSheet.create({
 });
 
 const CardSimpleUsageShowcase = () => {
+  const [focus, setFocus] = React.useState(false);
   const [user, setUser] = React.useState("");
   const [pasword, setPasword] = React.useState("");
 
+  keyboardDidHide = () => {
+    setFocus(false);
+  };
+  Keyboard.addListener("keyboardDidHide", keyboardDidHide);
+
   return (
     <View style={styles.view}>
-      <Layout style={styles.layoutCoche}>
-        <Coche></Coche>
-      </Layout>
+      {!focus ? (
+        <Layout style={styles.layoutCoche}>
+          <Coche></Coche>
+        </Layout>
+      ) : (
+        <Layout style={styles.layoutCoche2}></Layout>
+      )}
 
       <Card style={styles.card}>
         <Layout style={styles.layoutFormulary}>
@@ -87,13 +108,18 @@ const CardSimpleUsageShowcase = () => {
             value={user}
             style={styles.input}
             onChangeText={(nextValue) => setUser(nextValue)}
+            onFocus={(focus) => setFocus(focus)}
+            onBlur={(focus) => setFocus(!focus)}
           />
           <Input
             size="large"
             placeholder="Contraseña"
+            textContentType="password"
             value={pasword}
             style={styles.input}
             onChangeText={(nextValue) => setPasword(nextValue)}
+            onFocus={(focus) => setFocus(focus)}
+            onBlur={(focus) => setFocus(!focus)}
           />
           <Button appearance="filled" size="large" style={styles.button}>
             Login
@@ -107,14 +133,23 @@ const CardSimpleUsageShowcase = () => {
   );
 };
 
-export default () => (
-  <ApplicationProvider
-    {...eva}
-    theme={{ ...eva.light, ...theme }}
-    customMapping={mapping}
-  >
-    <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <CardSimpleUsageShowcase></CardSimpleUsageShowcase>
-    </Layout>
-  </ApplicationProvider>
-);
+export default () => {
+  return (
+    <ApplicationProvider
+      {...eva}
+      theme={{ ...eva.light, ...theme }}
+      customMapping={mapping}
+    >
+      <Layout
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <CardSimpleUsageShowcase></CardSimpleUsageShowcase>
+      </Layout>
+    </ApplicationProvider>
+  );
+};
