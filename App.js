@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(76, 175, 80, 0)",
   },
   layoutCoche2: {
-    height: 300,
+    height: 240,
     zIndex: -2,
 
     backgroundColor: "rgba(76, 175, 80, 0)",
