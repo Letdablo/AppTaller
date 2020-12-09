@@ -1,0 +1,6 @@
+
+ instalar node
+
+ npm install -g react-native-cli
+
+ npm install --global expo-cli
