@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { BackHandler, Alert } from "react-native";
 
 import * as eva from "@eva-design/eva";
@@ -81,9 +81,12 @@ const CardSimpleUsageShowcase = () => {
   const [focus, setFocus] = React.useState(false);
   const [user, setUser] = React.useState("");
   const [pasword, setPasword] = React.useState("");
-
+  const inputRefU = useRef(null);
+  const inputRefP = useRef(null);
   keyboardDidHide = () => {
     setFocus(false);
+    inputRefU.current.blur();
+    inputRefP.current.blur();
   };
   Keyboard.addListener("keyboardDidHide", keyboardDidHide);
 
@@ -103,6 +106,7 @@ const CardSimpleUsageShowcase = () => {
             Taller APP
           </Text>
           <Input
+            ref={inputRefU}
             size="large"
             placeholder="Usuario"
             value={user}
@@ -112,6 +116,7 @@ const CardSimpleUsageShowcase = () => {
             onBlur={(focus) => setFocus(!focus)}
           />
           <Input
+            ref={inputRefP}
             size="large"
             placeholder="Contraseña"
             textContentType="password"
