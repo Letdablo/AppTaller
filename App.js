@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import {
+  ApplicationProvider,
+  IconRegistry,
+  Layout,
+} from "@ui-kitten/components";
 import { default as theme } from "./theme.json";
 import { default as mapping } from "./mapping.json";
 import { NavigationContainer } from "@react-navigation/native";
@@ -10,15 +14,13 @@ import Registro from "./layouts/registro";
 import ListUsuarios from "./layouts/Usuarios";
 import ListaEventos from "./layouts/eventos";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
-
+import Menu from "./components/menu";
+import AppNavigator from "./layouts/home";
 export default () => {
+  const [login, setLogin] = React.useState(false);
   const Stack = createStackNavigator();
   return (
-    <ApplicationProvider
-      {...eva}
-      theme={{ ...eva.light, ...theme }}
-      customMapping={mapping}
-    >
+    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
       <IconRegistry icons={EvaIconsPack} />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
@@ -37,7 +39,7 @@ export default () => {
             }}
           />
           <Stack.Screen name="Usuarios" component={ListUsuarios} />
-          <Stack.Screen name="Eventos" component={ListaEventos} />
+          <Stack.Screen name="Home" component={AppNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApplicationProvider>

@@ -9,6 +9,7 @@ import {
 } from "@ui-kitten/components";
 
 import { StyleSheet, View, Text } from "react-native";
+import Menu from "../components/menu";
 
 const data = new Array(20).fill({
   title: "Title for Item",
@@ -44,8 +45,14 @@ const styles = StyleSheet.create({
     color: "#8F9BB3",
   },
 });
-
 export default function ListUsuarios({ navigation }) {
+  return (
+    <Layout>
+      <ListUsuariosComponent navigation={navigation} />
+    </Layout>
+  );
+}
+function ListUsuariosComponent({ navigation }) {
   const renderItem = ({ item, index }) => (
     <Card style={styles.card}>
       <Layout style={styles.container}>
@@ -71,7 +78,7 @@ export default function ListUsuarios({ navigation }) {
         </Layout>
         <Layout style={styles.layout}>
           <Button
-            onPress={() => navigation.navigate("Eventos")}
+            onPress={() => navigation.navigate("Citas")}
             size="small"
             style={{ borderColor: "#53BEB4", backgroundColor: "#53BEB4" }}
           >

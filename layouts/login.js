@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
 
 function CardLogin({ navigation }) {
   const [focus, setFocus] = React.useState(false);
+  const [login, seLogin] = React.useState(false);
   const [user, setUser] = React.useState("");
   const [pasword, setPasword] = React.useState("");
   const inputRefU = useRef(null);
@@ -86,6 +87,10 @@ function CardLogin({ navigation }) {
   };
   Keyboard.addListener("keyboardDidHide", keyboardDidHide);
 
+  function setLogin(estado) {
+    seLogin(estado);
+    navigation.navigate("Home");
+  }
   return (
     <View style={styles.view}>
       {!focus ? (
@@ -128,7 +133,7 @@ function CardLogin({ navigation }) {
               appearance="filled"
               size="large"
               style={styles.button}
-              onPress={() => navigation.navigate("Usuarios")}
+              onPress={() => setLogin(true)}
             >
               Login
             </Button>
