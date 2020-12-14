@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     color: "#8F9BB3",
   },
 });
-export default function ListUsuarios({ navigation }) {
+export default function ListVehiculos({ navigation }) {
   return (
     <Layout
       style={{
@@ -54,21 +54,19 @@ export default function ListUsuarios({ navigation }) {
         alignItems: "center",
       }}
     >
-      <ListUsuariosComponent navigation={navigation} />
+      <ListVehiculosComponent navigation={navigation} />
     </Layout>
   );
 }
-function ListUsuariosComponent({ navigation }) {
+function ListVehiculosComponent({ navigation }) {
   const renderItem = ({ item, index }) => (
     <Card style={styles.card}>
       <Layout style={styles.container}>
         <Layout style={styles.layout}>
-          <Icon style={styles.icon} fill="#357776" name="person" />
+          <Icon style={styles.icon} fill="#357776" name="car" />
         </Layout>
         <Layout style={styles.layout}>
-          <Text>
-            {item.title} {index}
-          </Text>
+          <Text>{item.title}</Text>
           <Text style={styles.description}>{item.description}</Text>
         </Layout>
         <Layout style={styles.layout}></Layout>

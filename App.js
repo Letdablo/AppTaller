@@ -23,21 +23,14 @@ export default () => {
     <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
       <IconRegistry icons={EvaIconsPack} />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Registro"
-            component={Registro}
-            options={{
-              headerShown: false,
-            }}
-          />
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Registro" component={Registro} />
           <Stack.Screen name="Usuarios" component={ListUsuarios} />
           <Stack.Screen name="Home" component={AppNavigator} />
         </Stack.Navigator>

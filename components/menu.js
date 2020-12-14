@@ -17,7 +17,7 @@ export default function Menu({ navigation }) {
   return (
     <BottomNavigation
       selectedIndex={selectedIndex}
-      onSelect={(index) => setSelectedIndex(index)}
+      onSelect={() => navigation.navigate("Citas")}
       indicatorStyle={{
         backgroundColor: "#357776",
         height: 4,
@@ -26,17 +26,17 @@ export default function Menu({ navigation }) {
       <BottomNavigationTab
         icon={PersonIcon}
         title="USUARIOS"
-        onSelect={(index) => navigation.navigate("Usuarios")}
+        onPress={() => navigation.navigate("Citas")}
       />
       <BottomNavigationTab
         icon={BellIcon}
         title="VEHICULOS"
-        onSelect={(index) => navigation.navigate("Vehiculos")}
+        onPress={() => navigation.navigate("Citas")}
       />
       <BottomNavigationTab
-        icon={BellIcon}
+        icon={EmailIcon}
         title="ORDENES"
-        onSelect={(index) => navigation.navigate("Ordenes")}
+        onPress={() => navigation.navigate("Citas")}
       />
     </BottomNavigation>
   );
