@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ListUsuarios() {
+export default function ListUsuarios({ navigation }) {
   const renderItem = ({ item, index }) => (
     <Card style={styles.card}>
       <Layout style={styles.container}>
@@ -71,6 +71,7 @@ export default function ListUsuarios() {
         </Layout>
         <Layout style={styles.layout}>
           <Button
+            onPress={() => navigation.navigate("Eventos")}
             size="small"
             style={{ borderColor: "#53BEB4", backgroundColor: "#53BEB4" }}
           >

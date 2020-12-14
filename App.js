@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./layouts/login";
 import Registro from "./layouts/registro";
 import ListUsuarios from "./layouts/Usuarios";
+import ListaEventos from "./layouts/eventos";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 
 export default () => {
@@ -36,6 +37,7 @@ export default () => {
             }}
           />
           <Stack.Screen name="Usuarios" component={ListUsuarios} />
+          <Stack.Screen name="Eventos" component={ListaEventos} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApplicationProvider>
