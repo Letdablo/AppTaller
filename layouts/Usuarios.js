@@ -8,7 +8,14 @@ const data = new Array(20).fill({
 });
 
 export default function ListUsuarios() {
-  const renderItemAccessory = (props) => <Button size="tiny">CONSULTAR</Button>;
+  const renderItemAccessory = (props) => (
+    <Button
+      size="tiny"
+      style={{ borderColor: "#53BEB4", backgroundColor: "#53BEB4" }}
+    >
+      CONSULTAR
+    </Button>
+  );
 
   const renderItemIcon = (props) => <Icon {...props} name="person" />;
 
