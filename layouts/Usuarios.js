@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   Icon,
@@ -7,9 +7,11 @@ import {
   ListItem,
   Card,
 } from "@ui-kitten/components";
+import { Alert } from "react-native";
+import { Linking } from "react-native";
+import { SearchBar } from "react-native-elements";
 
 import { StyleSheet, View, Text } from "react-native";
-import Menu from "../components/menu";
 
 const data = new Array(20).fill({
   title: "Title for Item",
@@ -20,6 +22,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     marginLeft: -10,
+  },
+  layout2: {
+    width: "45%",
+    backgroundColor: "#fff",
+    borderRadius: 0,
+    marginVertical: 8,
+    marginRight: 10,
   },
   layout: {
     backgroundColor: "#fff",
@@ -46,30 +55,87 @@ const styles = StyleSheet.create({
   },
 });
 export default function ListUsuarios({ navigation }) {
+  const [users, setUsers] = React.useState(0);
+  const [allusers, setAllusers] = React.useState(0);
+  const [search, setSearch] = React.useState(0);
+  useEffect(() => {
+    populateDataUsers();
+  }, []);
+
   return (
     <Layout
       style={{
+        width: "100%",
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
-      <ListUsuariosComponent navigation={navigation} />
+      <SearchBar
+        style={{ width: 400 }}
+        placeholder="Buscar Clientes..."
+        onChangeText={(e) => filter(e)}
+        value={search}
+      />
+      <ListUsuariosComponent navigation={navigation} users={users} />
     </Layout>
   );
+  function filter(searchNew) {
+    setSearch(searchNew);
+    let array = [];
+    if (searchNew != "") {
+      allusers.map((e) => {
+        let fullname = e.clientName + " " + e.surname;
+        if (fullname.includes(searchNew)) array.push(e);
+      });
+      setUsers(array);
+    } else {
+      setUsers(allusers);
+    }
+  }
+
+  function populateDataUsers() {
+    fetch(`https://garageapi.pre.manki.es/api/Client/ClientSearch`, {
+      method: "POST",
+      body: JSON.stringify({
+        name: "",
+        surname: "",
+        document: "",
+        email: "",
+        phone: "",
+        onlyPendingComments: false,
+        onlyOpenOrders: false,
+        onlyFavorite: false,
+        tags: [],
+        orderCriteriaId: "1",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (resp) {
+        setUsers(resp);
+        setAllusers(resp);
+      });
+  }
 }
-function ListUsuariosComponent({ navigation }) {
+
+function ListUsuariosComponent({ navigation, users }) {
   const renderItem = ({ item, index }) => (
     <Card style={styles.card}>
       <Layout style={styles.container}>
         <Layout style={styles.layout}>
           <Icon style={styles.icon} fill="#357776" name="person" />
         </Layout>
-        <Layout style={styles.layout}>
-          <Text>
-            {item.title} {index}
+        <Layout style={styles.layout2}>
+          <Text>+{item.clientName + " " + item.surname}</Text>
+          <Text
+            onPress={() => Linking.openURL(`tel:${"+" + item.phone}`)}
+            style={styles.description}
+          >
+            {"+" + item.phone}
           </Text>
-          <Text style={styles.description}>{item.description}</Text>
         </Layout>
         <Layout style={styles.layout}></Layout>
         <Layout style={styles.layout}>
@@ -97,5 +163,5 @@ function ListUsuariosComponent({ navigation }) {
     </Card>
   );
 
-  return <List style={styles.root} data={data} renderItem={renderItem} />;
+  return <List style={styles.root} data={users} renderItem={renderItem} />;
 }
