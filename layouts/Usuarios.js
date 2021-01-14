@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     color: "#8F9BB3",
   },
 });
+
 export default function ListUsuarios({ navigation }) {
   const [users, setUsers] = React.useState(0);
   const [allusers, setAllusers] = React.useState(0);
@@ -140,6 +141,11 @@ function ListUsuariosComponent({ navigation, users }) {
         <Layout style={styles.layout}></Layout>
         <Layout style={styles.layout}>
           <Button
+            onPress={() =>
+              navigation.navigate("Informacion Usuario", {
+                userId: item.clientId,
+              })
+            }
             size="small"
             style={{
               backgroundColor: "#357776",
@@ -152,7 +158,9 @@ function ListUsuariosComponent({ navigation, users }) {
         </Layout>
         <Layout style={styles.layout}>
           <Button
-            onPress={() => navigation.navigate("Citas")}
+            onPress={() =>
+              navigation.navigate("Citas", { userId: item.clientId })
+            }
             size="small"
             style={{ borderColor: "#53BEB4", backgroundColor: "#53BEB4" }}
           >
