@@ -85,7 +85,8 @@ export default function ListUsuarios({ navigation }) {
     if (searchNew != "") {
       allusers.map((e) => {
         let fullname = e.clientName + " " + e.surname;
-        if (fullname.includes(searchNew)) array.push(e);
+        if (fullname.toUpperCase().includes(searchNew.toUpperCase()))
+          array.push(e);
       });
       setUsers(array);
     } else {
@@ -150,6 +151,8 @@ function ListUsuariosComponent({ navigation, users }) {
             style={{
               backgroundColor: "#357776",
               borderColor: "#357776",
+              paddingTop: 15,
+              paddingBottom: 15,
               padding: 3,
             }}
           >
@@ -162,7 +165,12 @@ function ListUsuariosComponent({ navigation, users }) {
               navigation.navigate("Citas", { userId: item.clientId })
             }
             size="small"
-            style={{ borderColor: "#53BEB4", backgroundColor: "#53BEB4" }}
+            style={{
+              paddingTop: 15,
+              paddingBottom: 15,
+              borderColor: "#53BEB4",
+              backgroundColor: "#53BEB4",
+            }}
           >
             CITAS
           </Button>

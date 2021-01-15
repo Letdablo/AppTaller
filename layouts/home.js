@@ -13,6 +13,7 @@ import ListUsuarios from "./Usuarios";
 import ListVehiculos from "./Vehiculos";
 import ListaEventos from "./eventos";
 import InfoUsuario from "./InfoUsuario";
+import NotasUsuario from "./NotasUsuario";
 const Stack = createStackNavigator();
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -51,6 +52,7 @@ const StackTabNavigator = () => (
     <Stack.Screen name="Home" component={TabNavigator} />
     <Stack.Screen name="Citas" component={ListaEventos} />
     <Stack.Screen name="Informacion Usuario" component={InfoUsuario} />
+    <Stack.Screen name="Notas Usuario" component={NotasUsuario} />
   </Stack.Navigator>
 );
 
